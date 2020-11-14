@@ -1,8 +1,8 @@
-const characterAmtRange = document.getElementById("characterAmtRange")
-const characterAmtNumber = document.getElementById("characterAmtNumber")
-const includeUppercase = document.getElementById("includeUppercase")
-const includeNumberElement = document.getElementById("includeNumber")
-const includeSymbolElement = document.getElementById("includeSymbol")
+const characterAmountRange = document.getElementById("characterAmountRange")
+const characterAmountNumber = document.getElementById("characterAmountNumber")
+const includeUppercaseElement = document.getElementById("includeUppercase")
+const includeNumbersElement = document.getElementById("includeNumbers")
+const includeSymbolsElement = document.getElementById("includeSymbols")
 const form = document.getElementById("passwordGeneratorForm")
 const passwordDisplay = document.getElementById("passwordDisplay")
 
@@ -11,29 +11,32 @@ const LOWERCASE_CHAR_CODES = arrayFromLowToHigh(97, 122)
 const NUMBER_CHAR_CODES = arrayFromLowToHigh(48, 57)
 const SYMBOL_CHAR_CODES = arrayFromLowToHigh(33, 47)
 
-characterAmtNumber.addEventListener("input", syncCharacterAmount)
-characterAmtRange.addEventListener("input", syncCharacterAmount)
+characterAmountNumber.addEventListener("input", syncCharacterAmount)
+characterAmountRange.addEventListener("input", syncCharacterAmount)
 
 
 form.addEventListener("submit", e => {
     e.preventDefault()
-    const characterAmt = characterAmtNumber.value
+    const characterAmount = characterAmountNumber.value
     const includeUppercase = includeUppercase.checked
-    const includeNumber = includeNumber.checked
-    const includeSymbol = includeSymbol.checked
-    const password = generatePassword(characterAmt, includeUppercase, includeNumber, includeSymbol)
+    const includeNumbers = includeNumbers.checked
+    const includeSymbols = includeSymbols.checked
+    const password = generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols)
     passwordDisplay.innerText = password
 })
 
-function generatePassword(characterAmt, includeUppercase, includeNumber, includeSymbol) {
+
+
+function generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols) {
+    
     let charCodes = LOWERCASE_CHAR_CODES
     if (includeUppercase) charCodes = charCodes.concat (UPPERCASE_CHAR_CODES)
-    if (includeNumber) charCodes = charCodes.concat (NUMBER_CHAR_CODES)
-    if (includeSymbol) charCodes = charCodes.concat (SYMBOL_CHAR_CODES)
+    if (includeNumbers) charCodes = charCodes.concat (NUMBER_CHAR_CODES)
+    if (includeSymbols) charCodes = charCodes.concat (SYMBOL_CHAR_CODES)
 
     const passwordCharacters = []
-    for (let i = 0; i < characterAmt; i++) {
-        const characterCode = charCodes[Math.floor(Math.random() * characterAmt)]
+    for (let i = 0; i < characterAmount; i++) {
+        const characterCode = charCodes[Math.floor(Math.random() * characterlength)]
         passwordCharacters.push(String.fromCharCode(characterCode))
 
     }
@@ -51,8 +54,8 @@ function arrayFromLowToHigh(low, high){
 
 function syncCharacterAmount(e) {
     const value = e.target.value
-    characterAmtRange.value = value
-    characterAmtNumber.value = value
+    characterAmountRange.value = value
+    characterAmountNumber.value = value
 }
 
   

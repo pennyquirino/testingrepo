@@ -1,5 +1,5 @@
 body {
-    background-color: #c0c7df;
+    background-color: #333;
     margin: 0;
     color: white;
     min-height: 100vh;
@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    background-color: #3B4A48;
+    background-color: #006699;
     padding: 3rem;
     border-radius: 1rem;
     border: 2px solid black;
@@ -38,7 +38,7 @@ label {
     font-weight: bold;
 }
 
-.character-amt-container {
+.character-amount-container {
     display: flex;
     align-items: center;
 }
@@ -51,7 +51,7 @@ label {
     background-color: white;
     color: black;
     padding: 1rem;
-    border: 1px solid #101111;
+    border: 1px solid #333;
     height: 2rem;
     width: 350px;
     display: flex;
@@ -69,10 +69,22 @@ label {
     padding: .5 rem 1rem;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 1rem;
-
 }
 
 .btn:hover {
+    background-color: #ffffff33;
+}
+
+.btn2 {
+    grid-column: span 2;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: .5 rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn2:hover {
     background-color: #ffffff33;
 }
