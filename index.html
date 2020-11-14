@@ -13,28 +13,30 @@
     <div class="container">
         <h1 class="title">Password Generator</h1>
 
-        <h3 class="password-display" id="passwordDisplay">Password</h3>
+        <h3 class="passwordDisplay" id="passwordDisplay">Password</h3>
 
     <form id="passwordGeneratorForm" class="form">
 
-        <label for="characterAmountNumber">Number of Characters</label>
+        <label for="len">Number of Characters</label>
         <div class="character-amount-container"> 
         
             <input type="range" min="8" max="25" value="8" id="characterAmountRange">
             <input class="number-input" type="number" min="8" max="25" value="8" id="characterAmountNumber">
         </div>
         
-        
-        <label for="includeUppercase">Include Uppercase</label>
-        <input type="checkbox" id="includeUppercase">
+        <label for="lower">Include Lowercase</label>
+        <input type="checkbox" id="lower">
 
-        <label for="includeNumbers">Include Numbers</label>
-        <input type="checkbox" id="includeNumbers">
+        <label for="upper">Include Uppercase</label>
+        <input type="checkbox" id="upper">
 
-        <label for="includeSymbols">Include Symbols</label>
-        <input type="checkbox" id="includeSymbols">
+        <label for="number">Include Numbers</label>
+        <input type="checkbox" id="number">
 
-        <button onClick="generatePassword" class="btn" type="submit">Generate Password</button>
+        <label for="symbol">Include Symbols</label>
+        <input type="checkbox" id="symbol">
+
+        <button onClick="generate" class="btn" type="submit">Generate Password</button>
     
 
 

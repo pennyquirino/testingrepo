@@ -1,64 +1,79 @@
-const characterAmountRange = document.getElementById("characterAmountRange")
-const characterAmountNumber = document.getElementById("characterAmountNumber")
-const includeUppercaseElement = document.getElementById("includeUppercase")
-const includeNumbersElement = document.getElementById("includeNumbers")
-const includeSymbolsElement = document.getElementById("includeSymbols")
+const pwEl = document.getElementById("passwordDisplay");
+const copyEl = document.getElementById("copy");
+const lenEl = document.getElementById("len");
+const upperEl = document.getElementById("upper");
+const lowerEl = document.getElementById("lower");
+const numberEl = document.getElementById("number");
+const symbolEl = document.getElementById("symbol");
+const generateEl = document.getElementById("generate");
 const form = document.getElementById("passwordGeneratorForm")
-const passwordDisplay = document.getElementById("passwordDisplay")
 
-const UPPERCASE_CHAR_CODES = arrayFromLowToHigh(65, 90)
-const LOWERCASE_CHAR_CODES = arrayFromLowToHigh(97, 122)
-const NUMBER_CHAR_CODES = arrayFromLowToHigh(48, 57)
-const SYMBOL_CHAR_CODES = arrayFromLowToHigh(33, 47)
+const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+const numbers = "0123456789";
+const symbols = "!@#$%^&*()_+=[]";
 
-characterAmountNumber.addEventListener("input", syncCharacterAmount)
-characterAmountRange.addEventListener("input", syncCharacterAmount)
-
-
-form.addEventListener("submit", e => {
-    e.preventDefault()
-    const characterAmount = characterAmountNumber.value
-    const includeUppercase = includeUppercase.checked
-    const includeNumbers = includeNumbers.checked
-    const includeSymbols = includeSymbols.checked
-    const password = generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols)
-    passwordDisplay.innerText = password
-})
-
-
-
-function generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols) {
-    
-    let charCodes = LOWERCASE_CHAR_CODES
-    if (includeUppercase) charCodes = charCodes.concat (UPPERCASE_CHAR_CODES)
-    if (includeNumbers) charCodes = charCodes.concat (NUMBER_CHAR_CODES)
-    if (includeSymbols) charCodes = charCodes.concat (SYMBOL_CHAR_CODES)
-
-    const passwordCharacters = []
-    for (let i = 0; i < characterAmount; i++) {
-        const characterCode = charCodes[Math.floor(Math.random() * characterlength)]
-        passwordCharacters.push(String.fromCharCode(characterCode))
-
-    }
-    return passwordCharacters.join("")
-
-}
-    
-function arrayFromLowToHigh(low, high){
-    const array = []
-    for (let i = low; i <= high; i++) {
-        array.push(i)
-    }
-    return array 
+function getLowercase() {
+  return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
 }
 
-function syncCharacterAmount(e) {
-    const value = e.target.value
-    characterAmountRange.value = value
-    characterAmountNumber.value = value
+function getUppercase() {
+  return upperLetters[Math.floor(Math.random() * upperLetters.length)];
 }
 
-  
+function getNumber() {
+  return numbers[Math.floor(Math.random() * numbers.length)];
+}
+
+function getSymbol() {
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
+function generatePassword() {
+  const len = lenEl.value;
+  let password = "";
+
+  for (let i = 0; i < len; i++) {
+    const x = generateX();
+    password += x;
+  }
+
+  pwEl.innerText = password;
+}
+
+function generateX() {
+  const xs = [];
+  upperEl.checked && xs.push(getUppercase());
+  lowerEl.checked && xs.push(getLowercase());
+  numberEl.checked && xs.push(getNumber());
+  symbolEl.checked && xs.push(getSymbol());
+
+  if (xs.length === 0) 
+    return "";
+
+  return xs[Math.floor(Math.random() * xs.length)];
+}
+
+generateEl.addEventListener("click", generatePassword);
+
+copyEl.addEventListener("click", () => {
+  const textarea = document.createElement("passwordGeneratorForm");
+  const password = pwEl.innerText;
+
+  if (!password) {
+      return;
+  }
+
+  passwordGeneratorForm.value = password;
+  document.body.appendChild(textarea);
+  passwordGeneratorForm.select();
+  document.execCommand("copy");
+  passwordGeneratorForm.remove();
+  alert("Password copied to clipboard");
+});
+
+
+
 
 
 
